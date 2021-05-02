@@ -4,8 +4,9 @@ import yaml
 
 from flaskkr.user import User
 from flaskkr.user_repository import UserRepository
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 mysql = MySQL()
 db = yaml.load(open("db.yaml"), Loader=yaml.FullLoader)
@@ -18,12 +19,12 @@ mysql.init_app(app)
 user_repository = UserRepository(mysql)
 
 
-@app.route("/")
+@app.route("/api/user")
 def get_all_user():
     return user_repository.find_all()
 
 
-@app.route("/", methods=["POST"])
+@app.route("/api/user", methods=["POST"])
 def add_user():
     data = request.get_json()
     user_ = User(
@@ -37,7 +38,7 @@ def add_user():
     return users
 
 
-@app.route("/<userId>", methods=["PUT"])
+@app.route("/api/user/<userId>", methods=["PUT"])
 def update_user(userId):
     data = request.get_json()
     user_ = User(
@@ -51,7 +52,7 @@ def update_user(userId):
     return users
 
 
-@app.route("/<userId>", methods=["DELETE"])
+@app.route("/api/user/<userId>", methods=["DELETE"])
 def delete_user(userId):
     user_repository.delete_by_id(userId)
     users = user_repository.find_all()

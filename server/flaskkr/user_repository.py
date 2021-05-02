@@ -11,6 +11,7 @@ class UserRepository:
                 "SELECT JSON_ARRAYAGG"
                 + "("
                 + "JSON_OBJECT("
+                + "'userId',id, "
                 + "'firstName',first_name, "
                 + "'lastName', last_name,"
                 + "'emailAddress',email_address,"
