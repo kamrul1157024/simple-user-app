@@ -1,0 +1,7 @@
+div.add-user-container{
+display: grid;
+grid-template: auto auto;
+background-color: blueviolet;
+width: 400px;
+justify-content: center;
+}

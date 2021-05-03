@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import User from './User';
 import axios from 'axios';
 import './App.css';
+import AddUser from './AddUser';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
   const { users } = state;
   return (
     <div className="users-container">
+      <AddUser />
       {users.map(user =>
         <User
           key={user.userId}

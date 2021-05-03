@@ -2,7 +2,7 @@ div.container{
     width: 380px;
     height: 250px;
     background-color: white;
-    border: 1px solid rgb(122, 102, 235);
+    border: 1px solid #7a66eb;
     padding: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
