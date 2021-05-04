@@ -11,12 +11,13 @@ function App() {
   useEffect(() => {
     const fethcApi = async () => {
       const users = await getUsersFromServer();
-      setstate({ ...state, users: users });
+      updateUsers(users);
     };
     fethcApi();
   }, []);
 
   const updateUsers = (users) => {
+    if (!users) users = [];
     setstate({ ...state, users: users });
   }
 
