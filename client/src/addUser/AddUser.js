@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { UserInfoView } from '../userInfo/UserInfoView';
 import { adddUserInServer } from '../apis';
 
-const AddUser = ({ addUser }) => {
+const AddUser = ({ updateUsers }) => {
 
     const [state, setstate] = useState({
         view: 'add-icon',
@@ -64,12 +64,12 @@ const AddUser = ({ addUser }) => {
         setstate({ ...state, view: 'user-input' });
     }
 
-    const addUserHandler = (e) => {
+    const addUserHandler = async (e) => {
         e.preventDefault();
         setstate({ ...state, view: 'add-icon' });
         const { user } = state;
-        addUser(user);
-        adddUserInServer(user);
+        const users = await adddUserInServer(user);
+        updateUsers(users);
     }
 
     return getView();

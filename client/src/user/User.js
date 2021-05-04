@@ -4,7 +4,7 @@ import './User.css'
 import '../userInfo/UserInfoView.css'
 import { deleteUserInServer, updateUserInServer } from '../apis';
 
-const User = ({ user, removeUser }) => {
+const User = ({ user, updateUsers }) => {
 
   const [state, setstate] = useState({
     mode: 'show',
@@ -42,17 +42,18 @@ const User = ({ user, removeUser }) => {
     setstate({ ...state, mode: 'edit' });
   }
 
-  const updateHandler = () => {
+  const updateHandler = async () => {
     setstate({ ...state, mode: 'show' })
     const { user } = state;
     const { userId } = user;
-    updateUserInServer(user, userId);
+    const users = await updateUserInServer(user, userId);
+    updateUsers(users);
   }
 
   const deleteHandler = async () => {
     const { user: { userId } } = state;
-    removeUser(userId);
-    deleteUserInServer(userId)
+    const users = await deleteUserInServer(userId);
+    updateUsers(users);
   }
 
   const onChange = (e) => {

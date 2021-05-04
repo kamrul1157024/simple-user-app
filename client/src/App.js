@@ -16,16 +16,8 @@ function App() {
     fethcApi();
   }, []);
 
-  const addUser = (user) => {
-    const { users } = state;
-    const newUsers = [...users, user];
-    setstate({ ...state, users: newUsers });
-  }
-
-  const removeUser = (userId) => {
-    const { users } = state;
-    const newUsers = users.filter(user => user.userId !== userId);
-    setstate({ ...state, users: newUsers });
+  const updateUsers = (users) => {
+    setstate({ ...state, users: users });
   }
 
   const { users } = state;
@@ -34,13 +26,14 @@ function App() {
       <div className="top-bar">
         Simple-User-APP
       </div>
+
       <div className="users-container">
-        <AddUser addUser={addUser} />
+        <AddUser updateUsers={updateUsers} />
         {users.map(user =>
           <User
             key={user.userId}
             user={user}
-            removeUser={removeUser}
+            updateUsers={updateUsers}
           />)}
       </div>
     </>
