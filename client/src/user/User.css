@@ -1,0 +1,18 @@
+span.user-info{
+    grid-column: 1/-1;
+    justify-self: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: rgb(113, 43, 226);
+    margin:5px;
+}
+
+button.update{
+    grid-column: 1/-1;
+}
+
+.info{
+    font-size: 18px;
+    color:rgb(10, 0, 100) ;
+    font-weight: 400;
+}

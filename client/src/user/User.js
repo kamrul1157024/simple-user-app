@@ -1,30 +1,8 @@
-import axios from 'axios';
 import { useState } from 'react';
+import { UserInfoView } from '../userInfo/UserInfoView';
 import './User.css'
-
-const updateUser = async (user, userId)=> {
-  try{
-    const res= await axios.put(`http://localhost:5000/api/user/${userId}`,user);
-    return res.data;
-  }
-  catch(err)
-  {
-    console.error(err);
-  }
-};
-
-
-const deleteUser = async (userId)=> {
-  try{
-    const res= await axios.delete(`http://localhost:5000/api/user/${userId}`);
-    return res.data;
-  }
-  catch(err)
-  {
-    console.error(err);
-  }
-};
-
+import '../userInfo/UserInfoView.css'
+import { deleteUserInServer, updateUserInServer } from '../apis';
 
 const User = ({ user, removeUser }) => {
 
@@ -66,15 +44,15 @@ const User = ({ user, removeUser }) => {
 
   const updateHandler = () => {
     setstate({ ...state, mode: 'show' })
-    const {user} =state;
-    const {userId} = user;
-    updateUser(user,userId);
+    const { user } = state;
+    const { userId } = user;
+    updateUserInServer(user, userId);
   }
 
   const deleteHandler = async () => {
     const { user: { userId } } = state;
     removeUser(userId);
-    deleteUser(userId)
+    deleteUserInServer(userId)
   }
 
   const onChange = (e) => {
@@ -91,31 +69,9 @@ const User = ({ user, removeUser }) => {
     );
   }
 
-
-
-  const { user: { firstName, lastName, emailAddress, mobileNo } } = state;
-
-  return (
-    <div className="container">
-      <span className="user-info"> User Info</span>
-      <span className="details">
-        <span className="info-name">First name: </span>
-        {getView(firstName, 'firstName')}
-      </span>
-      <span className="details">
-        <span className="info-name">Last name: </span>
-        {getView(lastName, 'lastName')}
-      </span>
-      <span className="details">
-        <span className="info-name">Email Address: </span>
-        {getView(emailAddress, 'emailAddress')}
-      </span>
-      <span className="details">
-        <span className="info-name">Mobile No: </span>
-        {getView(mobileNo, 'mobileNo')}
-      </span>
-      {getButtonView()}
-    </div>
-  )
+  return <UserInfoView
+    userInfo={state.user}
+    showUserInfoAs={getView}
+    showButtonAs={getButtonView} />;
 };
 export default User;

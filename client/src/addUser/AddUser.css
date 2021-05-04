@@ -1,0 +1,12 @@
+div.add-user-icon{
+    grid-row: 1/-1;
+    grid-column: 1/-1;
+    display: grid;
+    grid-template: auto auto;
+    background-color: blueviolet;
+    justify-content: center;
+}
+
+button.add-user{
+    grid-column: 1/-1;
+}

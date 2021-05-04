@@ -9,18 +9,10 @@ div.container{
     grid-template-rows: repeat(6,auto);
     font-family: Verdana;
 }
+
 span.details{
     grid-column: 1/-1;
     margin: 1px;
-}
-
-span.user-info{
-    grid-column: 1/-1;
-    justify-self: center;
-    font-size: 22px;
-    font-weight: 700;
-    color: rgb(113, 43, 226);
-    margin:5px;
 }
 
 div.container:hover{
@@ -38,10 +30,6 @@ button{
     font-weight: 600;
 }
 
-button.update{
-    grid-column: 1/-1;
-}
-
 input[type=text]{
     width: 200px;
     border:none;
@@ -56,9 +44,4 @@ input:focus{
     font-size: 20px;
     color:rgb(112, 60, 223) ;
     font-weight: 600;
-}
-.info{
-    font-size: 18px;
-    color:rgb(10, 0, 100) ;
-    font-weight: 400;
 }

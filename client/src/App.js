@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import User from './User';
-import axios from 'axios';
+import User from './user/User';
 import './App.css';
-import AddUser from './AddUser';
+import AddUser from './addUser/AddUser';
+import { getUsersFromServer } from './apis';
 
 function App() {
 
@@ -10,16 +10,17 @@ function App() {
 
   useEffect(() => {
     const fethcApi = async () => {
-      try {
-        const res = await axios.get('http://localhost:5000/api/user');
-        setstate({ ...state, users: res.data });
-      }
-      catch (err) {
-        console.error(err);
-      }
+      const users = await getUsersFromServer();
+      setstate({ ...state, users: users });
     };
     fethcApi();
   }, []);
+
+  const addUser = (user) => {
+    const { users } = state;
+    const newUsers = [...users, user];
+    setstate({ ...state, users: newUsers });
+  }
 
   const removeUser = (userId) => {
     const { users } = state;
@@ -29,15 +30,20 @@ function App() {
 
   const { users } = state;
   return (
-    <div className="users-container">
-      <AddUser />
-      {users.map(user =>
-        <User
-          key={user.userId}
-          user={user}
-          removeUser={removeUser}
-        />)}
-    </div>
+    <>
+      <div className="top-bar">
+        Simple-User-APP
+      </div>
+      <div className="users-container">
+        <AddUser addUser={addUser} />
+        {users.map(user =>
+          <User
+            key={user.userId}
+            user={user}
+            removeUser={removeUser}
+          />)}
+      </div>
+    </>
   )
 }
 

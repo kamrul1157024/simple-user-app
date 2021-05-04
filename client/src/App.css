@@ -1,7 +1,19 @@
-div.users-container{
+div.top-bar {
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    padding: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    background: rgb(126, 22, 158);
+    background: linear-gradient(90deg, rgba(126, 22, 158, 0.9844746107465765) 48%, rgba(125, 0, 255, 1) 100%);
+}
+
+div.users-container {
     display: grid;
-    grid-template-rows: repeat(auto-fill,auto);
-    grid-template-columns: repeat(auto-fill,400px);
+    grid-template-rows: repeat(auto-fill, auto);
+    grid-template-columns: repeat(auto-fill, 400px);
     grid-gap: 10px;
     justify-content: center;
 }
