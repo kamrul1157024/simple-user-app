@@ -37,6 +37,7 @@ services:
     db:
         container_name: user-database
         image: mysql:8.0
+        platform: linux/amd64
         volumes: 
             - ./mysqldata:/var/lib/mysql
             - ./server/mysql-init-scripts:/docker-entrypoint-initdb.d
