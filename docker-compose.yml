@@ -31,7 +31,8 @@ services:
             - "5000:5000"
         environment: 
             FLASK_ENV: development
-        command: sh -c "/wait-for db:3306 -- flask run"
+        # command: sh -c "chmod +x /wait-for&&/wait-for db:3306 -- flask run"
+        command: sh -c "sleep 10s&&flask run"
 
     db:
         container_name: user-database

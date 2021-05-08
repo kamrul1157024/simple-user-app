@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, request
 from flaskext.mysql import MySQL
 import yaml
@@ -16,7 +18,6 @@ app.config["MYSQL_DATABASE_PASSWORD"] = db["MYSQL_PASSWORD"]
 app.config["MYSQL_DATABASE_HOST"] = db["MYSQL_HOST"]
 app.config["MYSQL_PORT"] = db["MYSQL_PORT"]
 app.config["MYSQL_DATABASE_DB"] = db["MYSQL_DB"]
-
 mysql.init_app(app)
 
 user_repository = UserRepository(mysql)
