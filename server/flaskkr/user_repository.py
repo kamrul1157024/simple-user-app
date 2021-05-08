@@ -46,7 +46,7 @@ class UserRepository:
             return result[0][0]
         except Exception as e:
             print("Unable to get the information: " + str(e))
-            return "{}"
+            return "[]"
 
     def find_by_id(self, user_id):
         pass

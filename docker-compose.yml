@@ -38,8 +38,10 @@ services:
         container_name: user-database
         image: mysql:8.0
         volumes: 
-            - ./mysqldata:/var/lib/mysql
             - ./server/mysql-init-scripts:/docker-entrypoint-initdb.d
+            - ./mysqldata:/var/lib/mysql
+        cap_add:
+            - SYS_NICE
         ports: 
             - "3306:3306"
         environment: 

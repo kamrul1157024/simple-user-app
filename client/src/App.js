@@ -22,6 +22,7 @@ function App() {
   }
 
   const { users } = state;
+  console.log(users);
   return (
     <>
       <div className="top-bar">

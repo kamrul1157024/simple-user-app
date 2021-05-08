@@ -66,10 +66,10 @@ const AddUser = ({ updateUsers }) => {
 
     const addUserHandler = async (e) => {
         e.preventDefault();
-        setstate({ ...state, view: 'add-icon' });
         const { user } = state;
         const users = await adddUserInServer(user);
         updateUsers(users);
+        setstate({ ...state, view: 'add-icon',user:{} });
     }
 
     return getView();
