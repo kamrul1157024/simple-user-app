@@ -4,7 +4,8 @@ import yaml
 
 from flaskkr.user import User
 from flaskkr.user_repository import UserRepository
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
 CORS(app)
 
@@ -15,17 +16,20 @@ app.config["MYSQL_DATABASE_PASSWORD"] = db["MYSQL_PASSWORD"]
 app.config["MYSQL_DATABASE_HOST"] = db["MYSQL_HOST"]
 app.config["MYSQL_PORT"] = db["MYSQL_PORT"]
 app.config["MYSQL_DATABASE_DB"] = db["MYSQL_DB"]
+
 mysql.init_app(app)
 
 user_repository = UserRepository(mysql)
 
 
 @app.route("/api/user")
+@cross_origin()
 def get_all_user():
     return user_repository.find_all()
 
 
 @app.route("/api/user", methods=["POST"])
+@cross_origin()
 def add_user():
     data = request.get_json()
     user_ = User(
@@ -40,6 +44,7 @@ def add_user():
 
 
 @app.route("/api/user/<userId>", methods=["PUT"])
+@cross_origin()
 def update_user(userId):
     data = request.get_json()
     user_ = User(
@@ -54,6 +59,7 @@ def update_user(userId):
 
 
 @app.route("/api/user/<userId>", methods=["DELETE"])
+@cross_origin()
 def delete_user(userId):
     user_repository.delete_by_id(userId)
     users = user_repository.find_all()

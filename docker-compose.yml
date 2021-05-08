@@ -1,0 +1,47 @@
+version: '3'
+
+services: 
+    client:
+        container_name: user-client
+        image: user-client
+        build: 
+            context: client
+        depends_on: 
+            - server
+        volumes: 
+            - .:/app/client
+            - /app/client/node_modules
+        ports: 
+            - "3001:3000"
+        environment:
+            - CHOKIDAR_USEPOLLING=true    
+        command: sh -c "npm start"
+
+    server:
+        container_name: user-server
+        image: user-server
+        build: 
+            context: server
+        depends_on:
+            - db
+        volumes: 
+            - ./server/flaskkr:/app/server/flaskkr
+            - ./server/db.yaml:/app/server/db.yaml
+            - ./wait-for:/wait-for
+        ports:
+            - "5000:5000"
+        environment: 
+            FLASK_ENV: development
+        command: sh -c "flask run"
+
+    db:
+        container_name: user-database
+        image: mysql:8.0
+        volumes: 
+            - ./mysqldata:/var/lib/mysql
+            - ./server/mysql-init-scripts:/docker-entrypoint-initdb.d
+        ports: 
+            - "3306:3306"
+        environment: 
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=user_info
