@@ -1,7 +1,7 @@
 attrs==20.3.0
 cffi==1.14.5
 click==7.1.2
-cryptography==3.4.7
+cryptography==39.0.1
 Flask==1.1.2
 Flask-Cors==3.0.10
 Flask-MySQL==1.5.2
