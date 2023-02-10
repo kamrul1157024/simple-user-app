@@ -1,9 +1,8 @@
-#syntax=docker/dockerfile:1
-FROM python:3.8.5-alpine
-WORKDIR /app/server
+FROM ubuntu:20.04
+RUN apt-get update
+RUN apt-get install -y python3.8 python3.8-dev python3.8-distutils python3.8-venv pip
 ENV FLASK_APP=./flaskkr
 ENV FLASK_RUN_HOST=0.0.0.0
-RUN apk add --no-cache gcc musl-dev python3-dev libffi-dev openssl-dev cargo linux-headers netcat-openbsd
 RUN pip install --upgrade pip
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
