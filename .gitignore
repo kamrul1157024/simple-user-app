@@ -1,2 +1,5 @@
 mysqldata/
 nginx/
+.terraform
+terraform.*
+.terraform.*
